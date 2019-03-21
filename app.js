@@ -12,7 +12,7 @@ app.use('/user', userRouter);
 
 app.get('/ping',(req,res)=>{
     res.status(200);
-    res.json({'ping':'🏓'})
+    res.json({'pong':'🏓'})
   });
 
 app.listen(port, ()=>{
