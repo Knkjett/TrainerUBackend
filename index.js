@@ -10,6 +10,11 @@ app.use(bodyParser.json());
 
 app.use('/user', userRouter);
 
+app.get('/ping',(req,res)=>{
+    res.status(200);
+    res.json({'ping':'🏓'})
+  });
+
 app.listen(port, ()=>{
     console.log(`Listening. TrainerU on port: ${port}`)
 })
