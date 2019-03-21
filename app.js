@@ -1,24 +1,14 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 3000;
-
-const userRouter = require('./routes/users');
+const {userRouter} = require('./routes/users');
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 app.use('/user', userRouter);
 
-app.get('/ping',(req,res)=>{
-    res.status(200);
-    res.json({'pong':'🏓'})
-  });
-
-app.listen(port, ()=>{
-    console.log(`Listening. TrainerU on port: ${port}`)
-})
-
+module.exports = {app}
 // All
 // - id (unique)
 // - createdAt

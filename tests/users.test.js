@@ -1,11 +1,14 @@
+const {app} = require('../app')
 const request = require('supertest')
-const {app,} = require('../app')
+jest.mock('../services/users')
+const userService = require('../services/users')
 
-test('when making GET request to /ping, we get back {"pong": true}', done => {
+test('testing read', done => {
+    userService.read.mockImplementation(()=> Promise.resolve({test:'1'}));
   request(app)
-      .get('/ping')
+      .get('/user/John')
       .then(response => {
-          expect(response.body).toBe({'pong':'🏓'})
+          expect(response.body).toEqual({'test':'1'})
           done()
       })
 })

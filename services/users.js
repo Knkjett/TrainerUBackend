@@ -24,3 +24,5 @@ UserService.delete = (name) => {
     name
   })
 }
+
+module.exports = UserService;

@@ -62,4 +62,4 @@ userRouter.get('/:name/order', (req, res, next) => {
 
 });
 
-module.exports = userRouter;
+module.exports = {userRouter};
