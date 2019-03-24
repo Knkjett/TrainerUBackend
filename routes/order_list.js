@@ -46,18 +46,18 @@ orderListRouter.put('/:id', (req, res) => {
     })
 });
 
-// DELETE - DELETE
-orderListRouter.delete('/:id', (req, res) => {
-  const {id} = req.params;
-  orderListService.delete(id)
-    .then(data => {
-      res.json({success: `Deleted orderList with id: ${id}`});
-    })
-    .catch(err => {
-      res.status(400);
-      res.send({"Message":err})
-    })
-});
+// // DELETE - DELETE
+// orderListRouter.delete('/:id', (req, res) => {
+//   const {id} = req.params;
+//   orderListService.delete(id)
+//     .then(data => {
+//       res.json({success: `Deleted orderList with id: ${id}`});
+//     })
+//     .catch(err => {
+//       res.status(400);
+//       res.send({"Message":err})
+//     })
+// });
 
 // GET - READ 
 orderListRouter.get('/:id/items', (req, res) => {

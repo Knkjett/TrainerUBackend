@@ -46,18 +46,18 @@ productsRouter.put('/:id', (req, res) => {
     })
 });
 
-// DELETE - DELETE
-productsRouter.delete('/:id', (req, res) => {
-  const {id} = req.params;
+// // DELETE - DELETE
+// productsRouter.delete('/:id', (req, res) => {
+//   const {id} = req.params;
 
-  productsService.delete(id)
-    .then(data => {
-      res.json({success: `Deleted product with id: ${id}`});
-    })
-    .catch(err => {
-      res.status(400);
-      res.send({"Message":err})
-    })
-});
+//   productsService.delete(id)
+//     .then(data => {
+//       res.json({success: `Deleted product with id: ${id}`});
+//     })
+//     .catch(err => {
+//       res.status(400);
+//       res.send({"Message":err})
+//     })
+// });
 
 module.exports = {productsRouter};

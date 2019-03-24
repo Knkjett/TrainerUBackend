@@ -21,13 +21,13 @@ ShopsService.update = (id, name, bio ='',socialmedia='') =>{
     socialmedia
   })
 }
-ShopsService.delete = (id) => {
-  return db.none('DELETE FROM shop WHERE id=${id}',{
-    id
-  })
-}
+// ShopsService.delete = (id) => {
+//   return db.none('DELETE FROM shop WHERE id=${id}',{
+//     id
+//   })
+// }
 //GET /:id/products
-ShopsService.readProduct = (id) => {
+ShopsService.readProducts = (id) => {
   return db.any('SELECT shop.name , products.* FROM products JOIN shop ON shop_id = ${id} WHERE (shop.id = ${id})', {
       id
   });

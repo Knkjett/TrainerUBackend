@@ -13,16 +13,17 @@ UserService.read = (id) =>{
     id
   });
 }
-UserService.update = (id,email) =>{
-  return db.none('UPDATE users SET email = ${email} WHERE id=${id}',{
+UserService.update = (id,email, token) =>{
+  return db.none('UPDATE users SET email = ${email}, token = ${token} WHERE id=${id}',{
     id,
-    email
+    email,
+    token
   })
 }
-UserService.delete = (id) => {
-  return db.none('DELETE FROM users WHERE id=${id}',{
-    id
-  })
-}
+// UserService.delete = (id) => {
+//   return db.none('DELETE FROM users WHERE id=${id}',{
+//     id
+//   })
+// }
 
 module.exports = UserService;

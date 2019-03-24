@@ -46,17 +46,17 @@ orderItemRouter.put('/:id', (req, res) => {
     })
 });
 
-// DELETE - DELETE
-orderItemRouter.delete('/:id', (req, res) => {
-  const {id} = req.params;
-  orderItemService.delete(id)
-    .then(data => {
-      res.json({success: `Deleted order item id: ${id}`});
-    })
-    .catch(err => {
-      res.status(400);
-      res.send({"Message":err})
-    })
-});
+// // DELETE - DELETE
+// orderItemRouter.delete('/:id', (req, res) => {
+//   const {id} = req.params;
+//   orderItemService.delete(id)
+//     .then(data => {
+//       res.json({success: `Deleted order item id: ${id}`});
+//     })
+//     .catch(err => {
+//       res.status(400);
+//       res.send({"Message":err})
+//     })
+// });
 
 module.exports = {orderItemRouter};

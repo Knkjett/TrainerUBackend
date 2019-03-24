@@ -16,15 +16,10 @@ ProductsService.update = (id, name, description, price, type, image_url_array=[]
     id, name, description, price, type, image_url_array, item_size, gender
   })
 }
-ProductsService.delete = (id) => {
-  return db.none('DELETE FROM products WHERE id=${id}',{
-    id
-  })
-}
-ProductsService.getall = (shop_id) =>{
-  return db.any ('SELECT name from products WHERE shop_id=${shop_id}',{
-    shop_id
-  });
-}
+// ProductsService.delete = (id) => {
+//   return db.none('DELETE FROM products WHERE id=${id}',{
+//     id
+//   })
+// }
 
 module.exports = ProductsService;

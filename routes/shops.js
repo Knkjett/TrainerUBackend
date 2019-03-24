@@ -46,24 +46,24 @@ shopsRouter.put('/:id', (req, res) => {
     })
 });
 
-// DELETE - DELETE
-shopsRouter.delete('/:id', (req, res) => {
-  const {id} = req.params;
-  shopsService.delete(id)
-    .then(data => {
-      res.status(200)
-      res.send({success: `Deleted shop: ${id}`});
-    })
-    .catch(err => {
-      res.status(400);
-      res.send({"Message":err})
-    })
-});
+// // DELETE - DELETE
+// shopsRouter.delete('/:id', (req, res) => {
+//   const {id} = req.params;
+//   shopsService.delete(id)
+//     .then(data => {
+//       res.status(200)
+//       res.send({success: `Deleted shop: ${id}`});
+//     })
+//     .catch(err => {
+//       res.status(400);
+//       res.send({"Message":err})
+//     })
+// });
 
 //GET - GET PRODUCT FROM STORE ID
 shopsRouter.get('/:id/products', (req, res) => {
   const {id} = req.params;
-  shopsService.readProduct(id)
+  shopsService.readProducts(id)
     .then(data => {
       res.status(200);
       res.send(data);
