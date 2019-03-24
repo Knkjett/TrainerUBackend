@@ -1,12 +1,23 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
-const {userRouter} = require('./routes/users');
 
+//Routes
+const {userRouter} = require('./routes/users');
+const {shopsRouter} = require('./routes/shops');
+const {productsRouter} = require('./routes/products');
+const {orderListRouter} = require('./routes/order_list');
+const {orderItemRouter} = require('./routes/order_item');
+
+//Middleware
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 app.use('/user', userRouter);
+app.use('/shop', shopsRouter);
+app.use('/products', productsRouter);
+app.use('/orders',orderListRouter);
+app.use('/orderItem',orderItemRouter);
 
 module.exports = {app}
 // All

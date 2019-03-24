@@ -3,63 +3,61 @@ const userRouter = express.Router();
 const userService = require('../services/users');
 
 // POST - CREATE 
-userRouter.post('/', (req, res, next) => {
-  const {name, email, token} = req.body;
-  userService.create(name, email, token)
+userRouter.post('/', (req, res) => {
+  const {email, token} = req.body;
+  userService.create(email, token)
     .then(data => {
-      res.json({success: `Created user named ${name} with special ID: ${data.id}`});
+      res.status(201);
+      res.send({success: `Created user named ${email}`});
     })
     .catch(err => {
-      console.log(err)
-      next(err);
+      res.status(400);
+      res.send({"Message":err})
     })
 });
 
 // GET - READ 
-userRouter.get('/:name/', (req, res, next) => {
-  const {name} = req.params;
-  userService.read(name)
+userRouter.get('/:id/', (req, res) => {
+  const {id} = req.params;
+  userService.read(id)
     .then(data => {
-      res.json(data);
+      res.status(200);
+      res.send(data);
     })
     .catch(err => {
-      console.log(err)
-      next(err);
+      res.status(400);
+      res.send({"Message":err})
     })
 });
 
 // PUT - UPDATE
-userRouter.put('/:name', (req, res, next) => {
+userRouter.put('/:id', (req, res) => {
+  const {id} = req.params;
   const {email} = req.body;
-  const {name} = req.params;
 
-  userService.update(name, email)
+  userService.update(id,email)
     .then(data => {
-      res.json({success: `Updated user named ${name} with new email: ${email}`});
+      res.status(201);
+      res.send({success: `Updated user: ${id} with new data.`});
     })
     .catch(err => {
-      console.log(err)
-      next(err);
+      res.status(400);
+      res.send({"Message":err})
     })
 });
 
 // DELETE - DELETE
-userRouter.delete('/:name', (req, res, next) => {
-  const {name} = req.params;
-
-  userService.delete(name)
+userRouter.delete('/:id', (req, res) => {
+  const {id} = req.params;
+  userService.delete(id)
     .then(data => {
-      res.json({success: `Deleted user named ${name}`});
+      res.status(200);
+      res.send({success: `Deleted user: ${id}`});
     })
     .catch(err => {
-      console.log(err)
-      next(err);
+      res.status(400);
+      res.send({"Message":err})
     })
-});
-
-userRouter.get('/:name/order', (req, res, next) => {
-  const {name} = req.params;
-
 });
 
 module.exports = {userRouter};

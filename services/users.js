@@ -1,27 +1,27 @@
-const pgp = require('pg-promise')({});
-const db = pgp('postgres://postgres:123@localhost:5432/traineru');
+const {db} = require('./dbConnect');
 const UserService = {};
 
-UserService.create = (name, email) =>{
-  return db.none(`INSERT INTO users (name, email) VALUES (${name},${email});`,{
-    name,
-    email
+
+UserService.create = (email,token) =>{
+  return db.none('INSERT INTO users (email,token) VALUES (${email}, ${token});',{
+    email,
+    token
   });
 }
 UserService.read = (id) =>{
-  return db.one (`SELECT name from users WHERE id=${id}`,{
+  return db.one ('SELECT email from users WHERE id=${id}',{
     id
   });
 }
-UserService.update = (name, email) =>{
-  return db.none(`UPDATE users SET email = ${email}, WHERE name=${name}`,{
-    name,
+UserService.update = (id,email) =>{
+  return db.none('UPDATE users SET email = ${email} WHERE id=${id}',{
+    id,
     email
   })
 }
-UserService.delete = (name) => {
-  return db.none(`DELETE FROM users WHERE name=${name}`,{
-    name
+UserService.delete = (id) => {
+  return db.none('DELETE FROM users WHERE id=${id}',{
+    id
   })
 }
 
