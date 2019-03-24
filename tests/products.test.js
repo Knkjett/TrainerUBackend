@@ -61,3 +61,59 @@ test('Products UPDATE Request', done => {
 //       done()
 //     })
 // })
+
+//===CONNECTION TEST===
+const request = require('supertest');
+const {app} = require('../app');
+test('connecting to Products POST',done => {
+  request(app)
+  .post('/products/')
+  .then((res)=>{
+    expect(res.status).toBe(201);
+    done();
+  })
+})
+test('connecting to Products GET',done => {
+  request(app)
+  .get('/products/1')
+  .then((res)=>{
+    expect(res.status).toBe(200);
+    done();
+  })
+})
+test('connecting to Products PUT',done => {
+  request(app)
+  .put('/products/1')
+  .then((res)=>{
+    expect(res.status).toBe(201);
+    done();
+  })
+})
+//===REJECT===
+test('connecting to Products POST Request', done => {
+  db.none.mockImplementation((...rest) => Promise.reject())
+  request(app)
+  .post('/products/')
+    .then((res) => {
+      expect(res.status).toBe(400);
+    done();
+    })
+})
+test('connecting to Products GET Request', done => {
+  db.one.mockImplementation((...rest) => Promise.reject())
+  request(app)
+  .get('/products/1')
+    .then((res) => {
+      expect(res.status).toBe(400);
+    done();
+    })
+})
+test('connecting to Products PUT Request', done => {
+  db.none.mockImplementation((...rest) => Promise.reject())
+  request(app)
+  .put('/products/1')
+    .then((res) => {
+      expect(res.status).toBe(400);
+    done();
+    })
+})

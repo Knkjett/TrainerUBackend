@@ -1,5 +1,4 @@
-// const {app} = require('../app')
-// const request = require('supertest')
+//===DATA TEST===
 jest.mock('../services/dbConnect')
 const {
   db
@@ -50,3 +49,59 @@ test('User UPDATE Request', done => {
 //       done()
 //     })
 // })
+
+//===CONNECTION TEST===
+const request = require('supertest');
+const {app} = require('../app');
+test('connecting to User POST',done => {
+  request(app)
+  .post('/user/')
+  .then((res)=>{
+    expect(res.status).toBe(201);
+    done();
+  })
+})
+test('connecting to User GET',done => {
+  request(app)
+  .get('/user/1')
+  .then((res)=>{
+    expect(res.status).toBe(200);
+    done();
+  })
+})
+test('connecting to User PUT',done => {
+  request(app)
+  .put('/user/1')
+  .then((res)=>{
+    expect(res.status).toBe(201);
+    done();
+  })
+})
+//===REJECT===
+test('connecting to User POST Request', done => {
+  db.none.mockImplementation((...rest) => Promise.reject())
+  request(app)
+  .post('/user/')
+    .then((res) => {
+      expect(res.status).toBe(400);
+    done();
+    })
+})
+test('connecting to User GET Request', done => {
+  db.one.mockImplementation((...rest) => Promise.reject())
+  request(app)
+  .get('/user/1')
+    .then((res) => {
+      expect(res.status).toBe(400);
+    done();
+    })
+})
+test('connecting to User PUT Request', done => {
+  db.none.mockImplementation((...rest) => Promise.reject())
+  request(app)
+  .put('/user/1')
+    .then((res) => {
+      expect(res.status).toBe(400);
+    done();
+    })
+})

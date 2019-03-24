@@ -17,7 +17,7 @@ app.use('/user', userRouter);
 app.use('/shop', shopsRouter);
 app.use('/products', productsRouter);
 app.use('/orders',orderListRouter);
-app.use('/orderItem',orderItemRouter);
+app.use('/orderitem',orderItemRouter);
 
 module.exports = {app}
 // All

@@ -11,7 +11,6 @@ orderItemRouter.post('/', (req, res) => {
       res.send({success: `Created order items for order id: ${order_id}`});
     })
     .catch(err => {
-      console.log(err)
       res.status(400);
       res.send({"Message":err})
     })
@@ -38,6 +37,7 @@ orderItemRouter.put('/:id', (req, res) => {
 
   orderItemService.update(id, shop_id, order_id, product_id, amount)
     .then(data => {
+      res.status(201);
       res.send({success: `Updated Order Item for order ${order_id} with new info`});
     })
     .catch(err => {

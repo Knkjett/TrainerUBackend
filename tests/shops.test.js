@@ -63,3 +63,78 @@ test('Shop get PRODUCTS Request', done => {
 //       done()
 //     })
 // })
+
+//===CONNECTION TEST===
+//===RESOLVE===
+const request = require('supertest');
+const {app} = require('../app');
+test('connecting to Shops POST',done => {
+  request(app)
+  .post('/shop/')
+  .then((res)=>{
+    expect(res.status).toBe(201);
+    done();
+  })
+})
+test('connecting to Shops GET',done => {
+  request(app)
+  .get('/shop/1')
+  .then((res)=>{
+    expect(res.status).toBe(200);
+    done();
+  })
+})
+test('connecting to Shops PUT',done => {
+  request(app)
+  .put('/shop/1')
+  .then((res)=>{
+    expect(res.status).toBe(201);
+    done();
+  })
+})
+test('connecting to Shops GET Products',done => {
+  request(app)
+  .get('/shop/1/products')
+  .then((res)=>{
+    expect(res.status).toBe(200);
+    done();
+  })
+})
+
+//===REJECT===
+test('connecting to Shop POST Request', done => {
+  db.none.mockImplementation((...rest) => Promise.reject())
+  request(app)
+  .post('/shop/')
+    .then((res) => {
+      expect(res.status).toBe(400);
+    done();
+    })
+})
+test('connecting to Shop GET Request', done => {
+  db.one.mockImplementation((...rest) => Promise.reject())
+  request(app)
+  .get('/shop/1')
+    .then((res) => {
+      expect(res.status).toBe(400);
+    done();
+    })
+})
+test('connecting to Shop PUT Request', done => {
+  db.none.mockImplementation((...rest) => Promise.reject())
+  request(app)
+  .put('/shop/1')
+    .then((res) => {
+      expect(res.status).toBe(400);
+    done();
+    })
+})
+test('connecting to Shop GET Request Products', done => {
+  db.any.mockImplementation((...rest) => Promise.reject())
+  request(app)
+  .get('/shop/1/products')
+    .then((res) => {
+      expect(res.status).toBe(400);
+    done();
+    })
+})

@@ -71,3 +71,74 @@ test('Shop get PRODUCTS Request', done => {
 //       done()
 //     })
 // })
+const request = require('supertest');
+const {app} = require('../app');
+test('connecting to OrderList POST',done => {
+  request(app)
+  .post('/orders/')
+  .then((res)=>{
+    expect(res.status).toBe(201);
+    done();
+  })
+})
+test('connecting to OrderList GET',done => {
+  request(app)
+  .get('/orders/1')
+  .then((res)=>{
+    expect(res.status).toBe(200);
+    done();
+  })
+})
+test('connecting to OrderList PUT',done => {
+  request(app)
+  .put('/orders/1')
+  .then((res)=>{
+    expect(res.status).toBe(201);
+    done();
+  })
+})
+test('connecting to OrderList GET items',done => {
+  request(app)
+  .get('/orders/1/items')
+  .then((res)=>{
+    expect(res.status).toBe(200);
+    done();
+  })
+})
+//===REJECT===
+test('connecting to OrderList POST Request', done => {
+  db.none.mockImplementation((...rest) => Promise.reject())
+  request(app)
+  .post('/orders/')
+    .then((res) => {
+      expect(res.status).toBe(400);
+    done();
+    })
+})
+test('connecting to OrderList GET Request', done => {
+  db.one.mockImplementation((...rest) => Promise.reject())
+  request(app)
+  .get('/orders/1')
+    .then((res) => {
+      expect(res.status).toBe(400);
+    done();
+    })
+})
+test('connecting to OrderList PUT Request', done => {
+  db.none.mockImplementation((...rest) => Promise.reject())
+  request(app)
+  .put('/orders/1')
+    .then((res) => {
+      expect(res.status).toBe(400);
+    done();
+    })
+})
+test('connecting to OrderList GET Request Items', done => {
+  db.any.mockImplementation((...rest) => Promise.reject())
+  request(app)
+  .get('/orders/1/items')
+    .then((res) => {
+      expect(res.status).toBe(400);
+    done();
+    })
+})

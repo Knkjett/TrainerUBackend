@@ -11,7 +11,6 @@ orderListRouter.post('/', (req, res) => {
       res.send({success: `Created order list for user: ${user_id}`});
     })
     .catch(err => {
-      console.log(err)
       res.status(400);
       res.send({"Message":err})
     })
@@ -38,6 +37,7 @@ orderListRouter.put('/:id', (req, res) => {
 
   orderListService.update(id, user_id, address,address2,city, zipcode,total_amount,payment_token)
     .then(data => {
+      res.status(201);
       res.send({success: `Updated Order List for user ${user_id} with new info`});
     })
     .catch(err => {
