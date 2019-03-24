@@ -26,5 +26,10 @@ ShopsService.delete = (id) => {
     id
   })
 }
-
+//GET /:id/products
+ShopsService.readProduct = (id) => {
+  return db.any('SELECT shop.name , products.* FROM products JOIN shop ON shop_id = ${id} WHERE (shop.id = ${id})', {
+      id
+  });
+}
 module.exports = ShopsService;

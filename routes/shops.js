@@ -60,17 +60,18 @@ shopsRouter.delete('/:id', (req, res) => {
     })
 });
 
-//GET - GET PRODUCT
-shopsRouter.get('/:name/products/product_id', (req, res) => {
-  const {name} = req.params;
-  shopsRouter.readProduct(product_id)
-      .then((data) => {
-          res.json(data);
-      })
-      .catch((err) => {
-        res.status(400);
-        res.send({"Message":err})
-      })
-})
+//GET - GET PRODUCT FROM STORE ID
+shopsRouter.get('/:id/products', (req, res) => {
+  const {id} = req.params;
+  shopsService.readProduct(id)
+    .then(data => {
+      res.status(200);
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(400);
+      res.send({"Message":err})
+    })
+});
 
 module.exports = {shopsRouter};

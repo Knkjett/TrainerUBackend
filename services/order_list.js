@@ -22,4 +22,10 @@ OrderListService.delete = (id) => {
   })
 }
 
+//Grab Order Items by ORDER ID
+OrderListService.readItems = (id) =>{
+  return db.any ( 'SELECT products.*, order_item.amount FROM order_item JOIN orderlist ON order_id= 1 JOIN products ON product_id = order_item.product_id WHERE (order_id = 1 AND products.id = order_item.id)  ',{
+    id
+  });
+}
 module.exports = OrderListService;

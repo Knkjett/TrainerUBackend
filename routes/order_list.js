@@ -59,4 +59,18 @@ orderListRouter.delete('/:id', (req, res) => {
     })
 });
 
+// GET - READ 
+orderListRouter.get('/:id/items', (req, res) => {
+  const {id} = req.params;
+  orderListService.readItems(id)
+    .then(data => {
+      res.status(200);
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(400);
+      res.send({"Message":err})
+    })
+});
+
 module.exports = {orderListRouter};
