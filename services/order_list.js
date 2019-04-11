@@ -1,9 +1,9 @@
 const {db} = require('./dbConnect');
 const OrderListService = {};
 
-OrderListService.create = (user_id, address, address2='', city, zipcode, total_amount, payment_token) =>{
-  return db.none( 'INSERT INTO orderlist (user_id, address, address2, city, zipcode, total_amount, payment_token) VALUES (${user_id}, ${address}, ${address2}, ${city}, ${zipcode}, ${total_amount}, ${payment_token});',{
-    user_id, address, address2, city, zipcode, total_amount, payment_token
+OrderListService.create = (user_id, first_name, last_name, address,address2='',city, zipcode, email,total_amount,payment_token) =>{
+  return db.none( 'INSERT INTO orderlist (user_id, first_name, last_name, address,address2,city, zipcode, email,total_amount,payment_token) VALUES (${user_id}, ${first_name}, ${last_name},${address}, ${address2}, ${city}, ${zipcode},${email}, ${total_amount}, ${payment_token});',{
+    user_id, first_name, last_name, address,address2,city, zipcode, email,total_amount,payment_token
   });
 }
 OrderListService.read = (id) =>{
@@ -24,7 +24,7 @@ OrderListService.update = (id, user_id, address, address2='', city, zipcode, tot
 
 //Grab Order Items by ORDER ID
 OrderListService.readItems = (id) =>{
-  return db.any ( 'SELECT products.*, order_item.amount FROM order_item JOIN orderlist ON order_id= 1 JOIN products ON product_id = order_item.product_id WHERE (order_id = 1 AND products.id = order_item.id);',{
+  return db.any ( 'SELECT products.*, order_item.amount FROM order_item JOIN orderlist ON order_id= 1 JOIN products ON product_id = order_item.product_id WHERE (order_id = ${id} AND products.id = order_item.id);',{
     id
   });
 }

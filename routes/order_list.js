@@ -4,8 +4,8 @@ const orderListService = require('../services/order_list');
 
 // POST - CREATE 
 orderListRouter.post('/', (req, res) => {
-  const {user_id, address,address2,city, zipcode,total_amount,payment_token} = req.body;
-  orderListService.create(user_id, address,address2,city, zipcode,total_amount,payment_token)
+  const {user_id, first_name, last_name, address,address2, city, zipcode, email, total_amount,payment_token} = req.body;
+  orderListService.create(user_id, first_name, last_name, address,address2,city, zipcode, email,total_amount,payment_token)
     .then(data => {
       res.status(201);
       res.send({success: `Created order list for user: ${user_id}`});

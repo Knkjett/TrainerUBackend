@@ -39,10 +39,13 @@ CREATE TABLE products (
 CREATE TABLE orderlist (
   id SERIAL PRIMARY KEY,
   user_id INT REFERENCES users(id),
+  first_name VARCHAR NOT NULL,
+  last_name VARCHAR NOT NULL,
   address VARCHAR NOT NULL,
   address2 VARCHAR,
   city VARCHAR NOT NULL,
   zipcode INT NOT NULL,
+  email VARCHAR NOT NULL,
   total_amount REAL NOT NULL,
   payment_token VARCHAR NOT NULL,
   createdAt TIMESTAMP DEFAULT NOW(),
@@ -73,10 +76,10 @@ INSERT INTO products (shop_id, name,description, image_url_array, price, type, o
 ('2','Kickboxing core','Core of Kickboxing', ARRAY[''],39.99,'lesson','Gender Neutral', true), 
 ('1','Bicep Tight Shirt','Best T-shirt to show off bicep gains',ARRAY[''],13.99,'wearable','Gender Neutral', true);
 
-INSERT INTO orderlist (user_id, address, address2, city, zipcode, total_amount, payment_token) VALUES
-('3','123 fake street', '2nd Fl', 'Flushing','11364',13.99, 'sptoken');
+INSERT INTO orderlist (user_id,first_name,last_name, address, address2, city, zipcode,email, total_amount, payment_token) VALUES
+('3','taq','karim','123 fake street', '2nd Fl', 'Flushing','11364','taq@email.com',13.99, 'sptoken');
 
-INSERT INTO order_item (user_id shop_id, order_id, product_id, amount) VALUES
+INSERT INTO order_item (user_id, shop_id, order_id, product_id, amount) VALUES
 (1,1,1,3,8);
 
 
