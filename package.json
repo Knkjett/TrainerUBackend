@@ -14,9 +14,11 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "firebase-admin": "^7.2.0",
     "pg-promise": "^8.6.4"
   },
   "devDependencies": {
+    "cors": "^2.8.5",
     "coveralls": "^3.0.3",
     "jest": "^24.5.0",
     "nodemon": "^1.18.10",

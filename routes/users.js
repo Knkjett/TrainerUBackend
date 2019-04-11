@@ -17,9 +17,9 @@ userRouter.post('/', (req, res) => {
 });
 
 // GET - READ 
-userRouter.get('/:id/', (req, res) => {
-  const {id} = req.params;
-  userService.read(id)
+userRouter.get('/:email', (req, res) => {
+  const {email} = req.params;
+  userService.read(email)
     .then(data => {
       res.status(200);
       res.send(data);

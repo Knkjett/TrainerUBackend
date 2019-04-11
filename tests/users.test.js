@@ -21,7 +21,7 @@ test('User GET Request', done => {
   db.one.mockImplementation((...rest) => Promise.resolve())
   userService.read(1)
     .then(() => {
-      expect(db.one.mock.calls[0][0]).toBe('SELECT email from users WHERE id=${id}');
+      expect(db.one.mock.calls[0][0]).toBe('SELECT id from users WHERE email=${email}');
       done()
     })
 })

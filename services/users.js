@@ -8,9 +8,9 @@ UserService.create = (email,token) =>{
     token
   });
 }
-UserService.read = (id) =>{
-  return db.one ('SELECT email from users WHERE id=${id}',{
-    id
+UserService.read = (email) =>{
+  return db.one ('SELECT id from users WHERE email=${email}',{
+    email
   });
 }
 UserService.update = (id,email, token) =>{

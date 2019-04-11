@@ -8,9 +8,9 @@ const productsService = require('../services/products')
 
 test('Products POST Request', done => {
   db.none.mockImplementation((...rest) => Promise.resolve())
-  productsService.create(1, 'notBrandedShoes', 'cool product',10.50,'wearable',['a','b'],'9.5','mens')
+  productsService.create(1, 'notBrandedShoes', 'cool product',10.50,'wearable',['a','b'],'Gender Neutral',true)
     .then(() => {
-      expect(db.none.mock.calls[0][0]).toBe('INSERT INTO products (shop_id, name, description, price, type, image_url_array, item_size, gender) VALUES (${shop_id}, ${name}, ${description}, ${price}, ${type}, ${image_url_array}, ${item_size}, ${gender});');
+      expect(db.none.mock.calls[0][0]).toBe('INSERT INTO products (shop_id, name, description, price, type, image_url_array, option, available) VALUES (${shop_id}, ${name}, ${description}, ${price}, ${type}, ${image_url_array}, ${option}, ${available});');
       expect(db.none.mock.calls[0][1]).toEqual({
         'shop_id': 1,
         'name': 'notBrandedShoes',
@@ -18,8 +18,8 @@ test('Products POST Request', done => {
         'price':10.50,
         'type':'wearable',
         'image_url_array':['a','b'],
-        'item_size':'9.5',
-        'gender':'mens'
+        'option':'Gender Neutral',
+        'available':true
       });
       done()
     })
@@ -34,9 +34,9 @@ test('Products GET Request', done => {
 })
 test('Products UPDATE Request', done => {
   db.none.mockImplementation((...rest) => Promise.resolve())
-  productsService.update(1, 'BrandedShoes', 'cooler product',21.50,'wearable',['a','b','c'],'9.5','mens')
+  productsService.update(1, 'BrandedShoes', 'cooler product',21.50,'wearable',['a','b','c'],'Gender Neutral',false)
      .then(() => {
-      expect(db.none.mock.calls[1][0]).toBe('UPDATE products SET name = ${name}, description=${description}, price=${price}, type=${type},image_url_array=${image_url_array},item_size=${item_size},gender=${gender} WHERE id=${id}')
+      expect(db.none.mock.calls[1][0]).toBe('UPDATE products SET name = ${name}, description=${description}, price=${price}, type=${type},image_url_array=${image_url_array},option=${option},available=${available} WHERE id=${id}')
       expect(db.none.mock.calls[1][1]).toEqual({
         'id': 1,
         'name': 'BrandedShoes',
@@ -44,8 +44,8 @@ test('Products UPDATE Request', done => {
         'price':21.50,
         'type':'wearable',
         'image_url_array':['a','b','c'],
-        'item_size':'9.5',
-        'gender':'mens'
+        'option':'Gender Neutral',
+        'available':false
       });
       done()
     })
