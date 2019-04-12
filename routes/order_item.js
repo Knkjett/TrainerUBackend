@@ -4,13 +4,14 @@ const orderItemService = require('../services/order_item');
 
 // POST - CREATE 
 orderItemRouter.post('/', (req, res) => {
-  const {shop_id, order_id, product_id, amount} = req.body;
-  orderItemService.create(shop_id, order_id, product_id, amount)
+  const {shop_id,user_id, order_id, product_id, amount} = req.body;
+  orderItemService.create(shop_id,user_id, order_id, product_id, amount)
     .then(data => {
       res.status(201);
       res.send({success: `Created order items for order id: ${order_id}`});
     })
     .catch(err => {
+      console.log(err)
       res.status(400);
       res.send({"Message":err})
     })
@@ -32,10 +33,10 @@ orderItemRouter.get('/:id', (req, res) => {
 
 // PUT - UPDATE
 orderItemRouter.put('/:id', (req, res) => {
-  const {shop_id, order_id, product_id, amount} = req.body;
+  const {amount} = req.body;
   const {id} = req.params;
 
-  orderItemService.update(id, shop_id, order_id, product_id, amount)
+  orderItemService.update(id, amount)
     .then(data => {
       res.status(201);
       res.send({success: `Updated Order Item for order ${order_id} with new info`});

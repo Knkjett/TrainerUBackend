@@ -2,7 +2,7 @@ const {db} = require('./dbConnect');
 const OrderListService = {};
 
 OrderListService.create = (user_id, first_name, last_name, address,address2='',city, zipcode, email,total_amount,payment_token) =>{
-  return db.none( 'INSERT INTO orderlist (user_id, first_name, last_name, address,address2,city, zipcode, email,total_amount,payment_token) VALUES (${user_id}, ${first_name}, ${last_name},${address}, ${address2}, ${city}, ${zipcode},${email}, ${total_amount}, ${payment_token});',{
+  return db.one( 'INSERT INTO orderlist (user_id, first_name, last_name, address,address2,city, zipcode, email,total_amount,payment_token) VALUES (${user_id}, ${first_name}, ${last_name},${address}, ${address2}, ${city}, ${zipcode},${email}, ${total_amount}, ${payment_token}) RETURNING id',{
     user_id, first_name, last_name, address,address2,city, zipcode, email,total_amount,payment_token
   });
 }

@@ -1,9 +1,9 @@
 const {db} = require('./dbConnect');
 const OrderItemService = {};
 
-OrderItemService.create = (shop_id, order_id, product_id, amount) =>{
-  return db.none('INSERT INTO order_item (shop_id, order_id, product_id, amount) VALUES (${shop_id}, ${order_id}, ${product_id}, ${amount});',{
-    shop_id, order_id, product_id, amount
+OrderItemService.create = (shop_id,user_id, order_id, product_id, amount) =>{
+  return db.none('INSERT INTO order_item (shop_id,user_id, order_id, product_id, amount) VALUES (${shop_id},${user_id}, ${order_id}, ${product_id}, ${amount});',{
+    shop_id, user_id, order_id, product_id, amount
   });
 }
 OrderItemService.read = (id) =>{
@@ -11,9 +11,9 @@ OrderItemService.read = (id) =>{
     id
   });
 }
-OrderItemService.update = (id, shop_id, order_id, product_id, amount) =>{
+OrderItemService.update = (id,amount) =>{
   return db.none('UPDATE order_item SET amount = ${amount} WHERE id=${id};',{
-    id, shop_id, order_id, product_id, amount
+    id,amount
   })
 }
 // OrderItemService.delete = (order_id) => {

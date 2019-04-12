@@ -7,8 +7,11 @@ orderListRouter.post('/', (req, res) => {
   const {user_id, first_name, last_name, address,address2, city, zipcode, email, total_amount,payment_token} = req.body;
   orderListService.create(user_id, first_name, last_name, address,address2,city, zipcode, email,total_amount,payment_token)
     .then(data => {
-      res.status(201);
-      res.send({success: `Created order list for user: ${user_id}`});
+      res.status(200);
+      res.send({
+        success: `${user_id}`,
+        id:data
+      });
     })
     .catch(err => {
       res.status(400);

@@ -8,7 +8,7 @@ userRouter.post('/', (req, res) => {
   userService.create(email, token)
     .then(data => {
       res.status(201);
-      res.send({success: `Created user named ${email}`});
+      res.send({ success: `Created user named ${email}`});
     })
     .catch(err => {
       res.status(400);

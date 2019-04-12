@@ -2,7 +2,7 @@ const {db} = require('./dbConnect');
 const ShopsService = {};
 
 ShopsService.create = (owner, name, bio = '',picture= '', socialmedia = '') =>{
-  return db.none('INSERT INTO shop (owner, name, bio, picture, socialmedia) VALUES (${owner},${name},${bio},${picture},${socialmedia});',{
+  return db.one('INSERT INTO shop (owner, name, bio, picture, socialmedia) VALUES (${owner},${name},${bio},${picture},${socialmedia}) RETURNING id;',{
     owner,
     name,
     bio,
