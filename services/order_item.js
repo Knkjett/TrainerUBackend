@@ -7,7 +7,7 @@ OrderItemService.create = (shop_id,user_id, order_id, product_id, amount) =>{
   });
 }
 OrderItemService.read = (id) =>{
-  return db.one ('SELECT * from order_item WHERE id=${id};',{
+  return db.any ('SELECT order_item.* FROM orderlist JOIN order_item ON order_id = orderlist.id WHERE orderlist.user_id = ${id}',{
     id
   });
 }
@@ -21,5 +21,10 @@ OrderItemService.update = (id,amount) =>{
 //     order_id
 //   })
 // }
+OrderItemService.getitems = (id) =>{
+  return db.any('SELECT order_item.* FROM orderlist JOIN order_item ON order_id = orderlist.id WHERE orderlist.user_id = ${id}',{
+    id
+  })
+}
 
 module.exports = OrderItemService;

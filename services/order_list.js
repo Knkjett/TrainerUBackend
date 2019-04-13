@@ -7,7 +7,7 @@ OrderListService.create = (user_id, first_name, last_name, address,address2='',c
   });
 }
 OrderListService.read = (id) =>{
-  return db.one ( 'SELECT * from orderlist WHERE id=${id};',{
+  return db.any ( 'SELECT * from orderlist WHERE user_id=${id};',{
     id
   });
 }
@@ -24,7 +24,7 @@ OrderListService.update = (id, user_id, address, address2='', city, zipcode, tot
 
 //Grab Order Items by ORDER ID
 OrderListService.readItems = (id) =>{
-  return db.any ( 'SELECT products.*, order_item.amount FROM order_item JOIN orderlist ON order_id= 1 JOIN products ON product_id = order_item.product_id WHERE (order_id = ${id} AND products.id = order_item.id);',{
+  return db.any ( 'SELECT products.*, order_item.amount FROM order_item JOIN orderlist ON order_id= id JOIN products ON product_id = order_item.product_id WHERE (order_id = ${id} AND products.id = order_item.id);',{
     id
   });
 }

@@ -35,7 +35,6 @@ orderItemRouter.get('/:id', (req, res) => {
 orderItemRouter.put('/:id', (req, res) => {
   const {amount} = req.body;
   const {id} = req.params;
-
   orderItemService.update(id, amount)
     .then(data => {
       res.status(201);
@@ -59,5 +58,17 @@ orderItemRouter.put('/:id', (req, res) => {
 //       res.send({"Message":err})
 //     })
 // });
+orderItemRouter.get('getall/:id', (req, res) => {
+  const {id} = req.params;
+  orderItemService.getitems(id)
+    .then(data => {
+      res.status(200);
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(400);
+      res.send({"Message":err})
+    })
+});
 
 module.exports = {orderItemRouter};
